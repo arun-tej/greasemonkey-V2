@@ -2,6 +2,86 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_BASE_URL = 'http://localhost:3333';
 
+// Mock data for demo purposes
+const mockData = {
+  user: {
+    id: '1',
+    email: 'demo@greasemonkey.com',
+    username: 'demo_user',
+    firstName: 'Demo',
+    lastName: 'User',
+    bio: 'Car enthusiast and weekend racer',
+    vehicleType: 'car',
+    role: 'user',
+    createdAt: new Date().toISOString(),
+  },
+  posts: [
+    {
+      id: '1',
+      title: 'My weekend project',
+      body: 'Just finished installing a new cold air intake on my Mustang. The sound is incredible!',
+      score: 15,
+      createdAt: new Date().toISOString(),
+      author: {
+        id: '2',
+        username: 'mustang_mike',
+        firstName: 'Mike',
+        lastName: 'Johnson',
+      },
+      garage: {
+        id: '1',
+        name: "Mike's Garage",
+      },
+      tags: ['mustang', 'cold-air-intake', 'performance'],
+    },
+    {
+      id: '2',
+      title: 'Track day coming up!',
+      body: 'Anyone else going to Laguna Seca this weekend? Would love to meet up with fellow enthusiasts.',
+      score: 8,
+      createdAt: new Date().toISOString(),
+      author: {
+        id: '3',
+        username: 'track_star',
+        firstName: 'Sarah',
+        lastName: 'Williams',
+      },
+      garage: {
+        id: '2',
+        name: "Sarah's Speed Shop",
+      },
+      tags: ['track-day', 'laguna-seca', 'meetup'],
+    },
+  ],
+  rides: [
+    {
+      id: '1',
+      title: 'Mountain Canyon Cruise',
+      description: 'Scenic drive through the mountains with great twisty roads',
+      startLocation: { lat: 37.7749, lng: -122.4194, address: 'San Francisco, CA' },
+      startTime: new Date(Date.now() + 86400000).toISOString(),
+      vehicleTypes: ['car', 'motorcycle'],
+      difficulty: 'medium',
+      distance: 120,
+      status: 'active',
+      creator: {
+        id: '4',
+        username: 'mountain_driver',
+        firstName: 'Alex',
+        lastName: 'Rodriguez',
+      },
+      participants: [],
+      _count: { participants: 3 },
+    },
+  ],
+  stats: {
+    garages: 2,
+    posts: 5,
+    friends: 12,
+    ridesCreated: 3,
+  }
+};
+
 class ApiService {
   private async getAuthToken(): Promise<string | null> {
     return await AsyncStorage.getItem('authToken');
