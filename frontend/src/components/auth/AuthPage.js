@@ -12,8 +12,12 @@ const AuthPage = () => {
         {/* Left side - Branding */}
         <div className="text-white space-y-6 text-center lg:text-left">
           <div className="flex items-center justify-center lg:justify-start space-x-3">
-            <div className="bg-orange-500 p-3 rounded-full">
-              <Bike className="h-8 w-8 text-white" />
+            <div className="w-12 h-12">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/lz1argy3_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png" 
+                alt="GreaseMonkey Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <h1 className="text-4xl font-bold">GreaseMonkey</h1>
           </div>
