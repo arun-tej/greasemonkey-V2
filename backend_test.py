@@ -12,6 +12,8 @@ class GreaseMonkeyAPITester:
         self.access_token = None
         self.user_data = None
         self.garage_id = None
+        self.post_id = None
+        self.comment_id = None
 
     def run_test(self, name, method, endpoint, expected_status, data=None, headers=None):
         """Run a single API test"""
