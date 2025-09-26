@@ -677,6 +677,43 @@ def main():
     discover_garages_ok = tester.test_discover_garages()
     join_garage_ok = tester.test_join_garage()
     
+    # 7. Test Posts API
+    print("\n📝 Testing Posts API...")
+    create_general_post_ok = tester.test_create_general_post()
+    create_garage_post_ok = tester.test_create_garage_post()
+    get_posts_feed_ok = tester.test_get_posts_feed()
+    get_garage_posts_ok = tester.test_get_garage_posts()
+    get_specific_post_ok = tester.test_get_specific_post()
+    update_post_ok = tester.test_update_post()
+    
+    # 8. Test Post Voting
+    print("\n👍 Testing Post Voting System...")
+    vote_like_ok = tester.test_vote_on_post_like()
+    vote_dislike_ok = tester.test_vote_on_post_dislike()
+    vote_remove_ok = tester.test_vote_on_post_remove()
+    
+    # 9. Test Comments API
+    print("\n💬 Testing Comments API...")
+    create_comment_ok = tester.test_create_comment()
+    get_comments_ok = tester.test_get_comments_for_post()
+    get_specific_comment_ok = tester.test_get_specific_comment()
+    update_comment_ok = tester.test_update_comment()
+    
+    # 10. Test Comment Liking
+    print("\n❤️ Testing Comment Liking System...")
+    like_comment_ok = tester.test_like_comment()
+    unlike_comment_ok = tester.test_unlike_comment()
+    
+    # 11. Test Deletion (Comments first, then Posts)
+    print("\n🗑️ Testing Deletion Operations...")
+    delete_comment_ok = tester.test_delete_comment()
+    delete_post_ok = tester.test_delete_post()
+    
+    # 12. Test Error Handling
+    print("\n🚫 Testing Error Handling...")
+    nonexistent_post_ok = tester.test_access_nonexistent_post()
+    nonexistent_comment_ok = tester.test_access_nonexistent_comment()
+    
     # Additional security tests
     print("\n🔒 Testing Security & Error Handling...")
     auth_failure_ok = tester.test_authentication_failure()
@@ -688,16 +725,52 @@ def main():
     
     # Detailed results
     print("\n📋 Test Summary:")
-    print(f"✅ Health Check: {'PASS' if health_ok else 'FAIL'}")
-    print(f"✅ User Registration: {'PASS' if register_ok else 'FAIL'}")
-    print(f"✅ User Login: {'PASS' if login_ok else 'FAIL'}")
-    print(f"✅ Get Current User: {'PASS' if current_user_ok else 'FAIL'}")
-    print(f"✅ Create Garage: {'PASS' if create_garage_ok else 'FAIL'}")
-    print(f"✅ Get User Garages: {'PASS' if get_garages_ok else 'FAIL'}")
-    print(f"✅ Discover Garages: {'PASS' if discover_garages_ok else 'FAIL'}")
-    print(f"✅ Join Garage (Expected Fail): {'PASS' if join_garage_ok else 'FAIL'}")
-    print(f"✅ Auth Failure Test: {'PASS' if auth_failure_ok else 'FAIL'}")
-    print(f"✅ Unauthorized Access Test: {'PASS' if unauthorized_ok else 'FAIL'}")
+    print("🔧 Basic API Tests:")
+    print(f"  ✅ Health Check: {'PASS' if health_ok else 'FAIL'}")
+    print(f"  ✅ User Registration: {'PASS' if register_ok else 'FAIL'}")
+    print(f"  ✅ User Login: {'PASS' if login_ok else 'FAIL'}")
+    print(f"  ✅ Get Current User: {'PASS' if current_user_ok else 'FAIL'}")
+    
+    print("\n🏠 Garage API Tests:")
+    print(f"  ✅ Create Garage: {'PASS' if create_garage_ok else 'FAIL'}")
+    print(f"  ✅ Get User Garages: {'PASS' if get_garages_ok else 'FAIL'}")
+    print(f"  ✅ Discover Garages: {'PASS' if discover_garages_ok else 'FAIL'}")
+    print(f"  ✅ Join Garage (Expected Fail): {'PASS' if join_garage_ok else 'FAIL'}")
+    
+    print("\n📝 Posts API Tests:")
+    print(f"  ✅ Create General Post: {'PASS' if create_general_post_ok else 'FAIL'}")
+    print(f"  ✅ Create Garage Post: {'PASS' if create_garage_post_ok else 'FAIL'}")
+    print(f"  ✅ Get Posts Feed: {'PASS' if get_posts_feed_ok else 'FAIL'}")
+    print(f"  ✅ Get Garage Posts: {'PASS' if get_garage_posts_ok else 'FAIL'}")
+    print(f"  ✅ Get Specific Post: {'PASS' if get_specific_post_ok else 'FAIL'}")
+    print(f"  ✅ Update Post: {'PASS' if update_post_ok else 'FAIL'}")
+    
+    print("\n👍 Post Voting Tests:")
+    print(f"  ✅ Vote Like: {'PASS' if vote_like_ok else 'FAIL'}")
+    print(f"  ✅ Vote Dislike: {'PASS' if vote_dislike_ok else 'FAIL'}")
+    print(f"  ✅ Remove Vote: {'PASS' if vote_remove_ok else 'FAIL'}")
+    
+    print("\n💬 Comments API Tests:")
+    print(f"  ✅ Create Comment: {'PASS' if create_comment_ok else 'FAIL'}")
+    print(f"  ✅ Get Comments: {'PASS' if get_comments_ok else 'FAIL'}")
+    print(f"  ✅ Get Specific Comment: {'PASS' if get_specific_comment_ok else 'FAIL'}")
+    print(f"  ✅ Update Comment: {'PASS' if update_comment_ok else 'FAIL'}")
+    
+    print("\n❤️ Comment Liking Tests:")
+    print(f"  ✅ Like Comment: {'PASS' if like_comment_ok else 'FAIL'}")
+    print(f"  ✅ Unlike Comment: {'PASS' if unlike_comment_ok else 'FAIL'}")
+    
+    print("\n🗑️ Deletion Tests:")
+    print(f"  ✅ Delete Comment: {'PASS' if delete_comment_ok else 'FAIL'}")
+    print(f"  ✅ Delete Post: {'PASS' if delete_post_ok else 'FAIL'}")
+    
+    print("\n🚫 Error Handling Tests:")
+    print(f"  ✅ Non-existent Post: {'PASS' if nonexistent_post_ok else 'FAIL'}")
+    print(f"  ✅ Non-existent Comment: {'PASS' if nonexistent_comment_ok else 'FAIL'}")
+    
+    print("\n🔒 Security Tests:")
+    print(f"  ✅ Auth Failure Test: {'PASS' if auth_failure_ok else 'FAIL'}")
+    print(f"  ✅ Unauthorized Access Test: {'PASS' if unauthorized_ok else 'FAIL'}")
     
     if tester.tests_passed == tester.tests_run:
         print("\n🎉 All GreaseMonkey backend tests passed!")
