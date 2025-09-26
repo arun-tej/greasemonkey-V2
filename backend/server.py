@@ -8,6 +8,8 @@ from pathlib import Path
 # Import routes
 from routes.auth import router as auth_router
 from routes.garage import router as garage_router
+from routes.posts import router as posts_router
+from routes.comments import router as comments_router
 from database import create_indexes
 
 ROOT_DIR = Path(__file__).parent
