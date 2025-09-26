@@ -6,9 +6,9 @@ import logging
 from pathlib import Path
 
 # Import routes
-from .routes.auth import router as auth_router
-from .routes.garage import router as garage_router
-from .database import create_indexes
+from routes.auth import router as auth_router
+from routes.garage import router as garage_router
+from database import create_indexes
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
