@@ -39,8 +39,12 @@ const Navbar = () => {
               className="flex items-center space-x-2 cursor-pointer"
               onClick={() => navigate('/feed')}
             >
-              <div className="bg-orange-500 p-2 rounded-full">
-                <Bike className="h-6 w-6 text-white" />
+              <div className="w-8 h-8">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/lz1argy3_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png" 
+                  alt="GreaseMonkey Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="text-xl font-bold text-gray-900">GreaseMonkey</span>
             </div>
