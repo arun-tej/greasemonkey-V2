@@ -52,7 +52,13 @@ const LoginScreen = ({ navigation }: any) => {
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <Ionicons name="car-sport" size={80} color="#FF6B35" />
+          <View style={styles.logoContainer}>
+            <Image 
+              source={{ uri: 'https://customer-assets.emergentagent.com/job_greasy-github-sync/artifacts/kwpggzdn_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png' }}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </View>
           <Text style={styles.title}>GreaseMonkey</Text>
           <Text style={styles.subtitle}>Connect. Ride. Share.</Text>
         </View>
