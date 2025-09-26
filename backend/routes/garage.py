@@ -2,10 +2,10 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import List
 from datetime import datetime
-from ..models.garage import GarageCreate, GarageUpdate, GarageResponse, JoinGarageRequest, Garage
-from ..models.user import UserInDB
-from ..auth import get_current_active_user
-from ..database import get_database
+from models.garage import GarageCreate, GarageUpdate, GarageResponse, JoinGarageRequest, Garage
+from models.user import UserInDB
+from auth import get_current_active_user
+from database import get_database
 
 router = APIRouter(prefix="/garages", tags=["garages"])
 
