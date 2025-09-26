@@ -90,16 +90,6 @@ const LoginScreen = ({ navigation }: any) => {
           </TouchableOpacity>
 
           <TouchableOpacity 
-            style={[styles.button, styles.demoButton]} 
-            onPress={handleDemoLogin}
-            disabled={isLoading}
-          >
-            <Text style={[styles.buttonText, styles.demoButtonText]}>
-              Try Demo Account
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
             style={styles.linkButton} 
             onPress={() => navigation.navigate('Register')}
           >
