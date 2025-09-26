@@ -6,8 +6,8 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 import os
 from motor.motor_asyncio import AsyncIOMotorDatabase
-from .models.user import UserInDB
-from .database import get_database
+from models.user import UserInDB
+from database import get_database
 
 # Security configuration
 SECRET_KEY = os.environ.get("SECRET_KEY", "greasemonkey_secret_key_change_in_production")
