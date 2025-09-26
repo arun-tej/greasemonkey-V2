@@ -28,19 +28,8 @@ const LoginScreen = ({ navigation }: any) => {
     setIsLoading(true);
     try {
       await login(email, password);
-    } catch (error) {
-      Alert.alert('Login Failed', 'Invalid credentials');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDemoLogin = async () => {
-    setIsLoading(true);
-    try {
-      await login('admin@example.com', 'admin123');
-    } catch (error) {
-      Alert.alert('Demo Login Failed', 'Please try again');
+    } catch (error: any) {
+      Alert.alert('Login Failed', error.message || 'Invalid credentials');
     } finally {
       setIsLoading(false);
     }
