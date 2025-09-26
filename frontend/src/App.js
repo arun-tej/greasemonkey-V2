@@ -1,54 +1,44 @@
-import { useEffect } from "react";
+import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import Layout from "./components/layout/Layout";
+import Feed from "./components/feed/Feed";
+import { Toaster } from "./components/ui/sonner";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+// Placeholder components for routes
+const Garages = () => (
+  <div className="text-center py-12">
+    <h1 className="text-2xl font-bold mb-4">Garages</h1>
+    <p className="text-gray-600">Garage management coming soon...</p>
+  </div>
+);
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+const Profile = () => (
+  <div className="text-center py-12">
+    <h1 className="text-2xl font-bold mb-4">Profile</h1>
+    <p className="text-gray-600">Profile page coming soon...</p>
+  </div>
+);
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Navigate to="/feed" replace />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/garages" element={<Garages />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Layout>
+        <Toaster />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
+
+export default App;
 
 export default App;
