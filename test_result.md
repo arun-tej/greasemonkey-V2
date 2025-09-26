@@ -151,28 +151,34 @@ backend:
         comment: "TESTED: Garage system fully working. All garage endpoints tested successfully: POST /api/garages/ (create garage), GET /api/garages/ (get user's garages), GET /api/garages/discover (discover public garages), POST /api/garages/{garage_id}/join (join garage with proper validation). Garage ownership, membership, admin controls, and privacy settings all functioning correctly."
 
   - task: "Posts & Media Sharing API"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/backend/models/post.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Posts with text, images, hashtags support"
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented posts API with create, read, update, delete, voting system, and garage integration"
 
   - task: "Comments System API"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/backend/models/comment.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Comment system for community discussions"
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented comments API with CRUD operations, like system, and post integration"
 
   - task: "Health Check Endpoint"
     implemented: true
