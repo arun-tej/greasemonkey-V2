@@ -254,6 +254,399 @@ class GreaseMonkeyAPITester:
         
         return success
 
+    # ========== POSTS API TESTS ==========
+    
+    def test_create_general_post(self):
+        """Test creating a general post (not garage-specific)"""
+        if not self.access_token:
+            print("⚠️ Skipping create general post test - no access token")
+            return False
+            
+        post_data = {
+            "content": "Just finished an amazing ride through the mountains! The weather was perfect and the roads were smooth. #MountainRiding #MotorcycleLife",
+            "image_urls": ["https://example.com/mountain-ride1.jpg", "https://example.com/mountain-ride2.jpg"],
+            "hashtags": ["MountainRiding", "MotorcycleLife", "WeekendRide"]
+        }
+        
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Create General Post",
+            "POST",
+            "api/posts/",
+            200,
+            data=post_data,
+            headers=headers
+        )
+        
+        if success and response:
+            self.post_id = response.get('id')
+            print(f"📝 General post created with ID: {self.post_id}")
+        
+        return success
+
+    def test_create_garage_post(self):
+        """Test creating a garage-specific post"""
+        if not self.access_token or not self.garage_id:
+            print("⚠️ Skipping create garage post test - no access token or garage ID")
+            return False
+            
+        post_data = {
+            "content": "Hey garage members! Planning a group ride this weekend. Who's interested? We'll meet at the usual spot at 8 AM. #GroupRide #GarageRide",
+            "garage_id": self.garage_id,
+            "hashtags": ["GroupRide", "GarageRide", "WeekendPlans"]
+        }
+        
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Create Garage Post",
+            "POST",
+            "api/posts/",
+            200,
+            data=post_data,
+            headers=headers
+        )
+        
+        return success
+
+    def test_get_posts_feed(self):
+        """Test getting posts feed"""
+        if not self.access_token:
+            print("⚠️ Skipping get posts feed test - no access token")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Get Posts Feed",
+            "GET",
+            "api/posts/?limit=10&offset=0",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_get_garage_posts(self):
+        """Test getting posts from specific garage"""
+        if not self.access_token or not self.garage_id:
+            print("⚠️ Skipping get garage posts test - no access token or garage ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Get Garage Posts",
+            "GET",
+            f"api/posts/?garage_id={self.garage_id}&limit=10",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_get_specific_post(self):
+        """Test getting a specific post by ID"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping get specific post test - no access token or post ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Get Specific Post",
+            "GET",
+            f"api/posts/{self.post_id}",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_update_post(self):
+        """Test updating a post (author only)"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping update post test - no access token or post ID")
+            return False
+            
+        update_data = {
+            "content": "Updated: Just finished an amazing ride through the mountains! The weather was perfect and the roads were smooth. Added some new photos! #MountainRiding #MotorcycleLife #Updated",
+            "hashtags": ["MountainRiding", "MotorcycleLife", "WeekendRide", "Updated"]
+        }
+        
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Update Post",
+            "PUT",
+            f"api/posts/{self.post_id}",
+            200,
+            data=update_data,
+            headers=headers
+        )
+        
+        return success
+
+    def test_vote_on_post_like(self):
+        """Test voting on a post (like)"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping vote on post test - no access token or post ID")
+            return False
+            
+        vote_data = {"vote_type": "like"}
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Vote on Post (Like)",
+            "POST",
+            f"api/posts/{self.post_id}/vote",
+            200,
+            data=vote_data,
+            headers=headers
+        )
+        
+        return success
+
+    def test_vote_on_post_dislike(self):
+        """Test voting on a post (dislike)"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping vote on post dislike test - no access token or post ID")
+            return False
+            
+        vote_data = {"vote_type": "dislike"}
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Vote on Post (Dislike)",
+            "POST",
+            f"api/posts/{self.post_id}/vote",
+            200,
+            data=vote_data,
+            headers=headers
+        )
+        
+        return success
+
+    def test_vote_on_post_remove(self):
+        """Test removing vote on a post"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping remove vote on post test - no access token or post ID")
+            return False
+            
+        vote_data = {"vote_type": "remove"}
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Remove Vote on Post",
+            "POST",
+            f"api/posts/{self.post_id}/vote",
+            200,
+            data=vote_data,
+            headers=headers
+        )
+        
+        return success
+
+    # ========== COMMENTS API TESTS ==========
+    
+    def test_create_comment(self):
+        """Test creating a comment on a post"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping create comment test - no access token or post ID")
+            return False
+            
+        comment_data = {
+            "content": "Great post! I love mountain riding too. Which route did you take? The scenery looks amazing!",
+            "post_id": self.post_id
+        }
+        
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Create Comment",
+            "POST",
+            "api/comments/",
+            200,
+            data=comment_data,
+            headers=headers
+        )
+        
+        if success and response:
+            self.comment_id = response.get('id')
+            print(f"💬 Comment created with ID: {self.comment_id}")
+        
+        return success
+
+    def test_get_comments_for_post(self):
+        """Test getting comments for a specific post"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping get comments test - no access token or post ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Get Comments for Post",
+            "GET",
+            f"api/comments/?post_id={self.post_id}&limit=20",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_get_specific_comment(self):
+        """Test getting a specific comment by ID"""
+        if not self.access_token or not self.comment_id:
+            print("⚠️ Skipping get specific comment test - no access token or comment ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Get Specific Comment",
+            "GET",
+            f"api/comments/{self.comment_id}",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_update_comment(self):
+        """Test updating a comment (author only)"""
+        if not self.access_token or not self.comment_id:
+            print("⚠️ Skipping update comment test - no access token or comment ID")
+            return False
+            
+        update_data = {
+            "content": "Updated: Great post! I love mountain riding too. Which route did you take? The scenery looks amazing! Hope to join you next time!"
+        }
+        
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Update Comment",
+            "PUT",
+            f"api/comments/{self.comment_id}",
+            200,
+            data=update_data,
+            headers=headers
+        )
+        
+        return success
+
+    def test_like_comment(self):
+        """Test liking a comment"""
+        if not self.access_token or not self.comment_id:
+            print("⚠️ Skipping like comment test - no access token or comment ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Like Comment",
+            "POST",
+            f"api/comments/{self.comment_id}/like",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_unlike_comment(self):
+        """Test unliking a comment (toggle like off)"""
+        if not self.access_token or not self.comment_id:
+            print("⚠️ Skipping unlike comment test - no access token or comment ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Unlike Comment (Toggle)",
+            "POST",
+            f"api/comments/{self.comment_id}/like",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_delete_comment(self):
+        """Test deleting a comment (author only)"""
+        if not self.access_token or not self.comment_id:
+            print("⚠️ Skipping delete comment test - no access token or comment ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Delete Comment",
+            "DELETE",
+            f"api/comments/{self.comment_id}",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_delete_post(self):
+        """Test deleting a post (author only) - should also delete associated comments"""
+        if not self.access_token or not self.post_id:
+            print("⚠️ Skipping delete post test - no access token or post ID")
+            return False
+            
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Delete Post",
+            "DELETE",
+            f"api/posts/{self.post_id}",
+            200,
+            headers=headers
+        )
+        
+        return success
+
+    def test_access_nonexistent_post(self):
+        """Test accessing a non-existent post"""
+        if not self.access_token:
+            print("⚠️ Skipping non-existent post test - no access token")
+            return False
+            
+        fake_post_id = str(uuid.uuid4())
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Access Non-existent Post",
+            "GET",
+            f"api/posts/{fake_post_id}",
+            404,
+            headers=headers
+        )
+        
+        return success
+
+    def test_access_nonexistent_comment(self):
+        """Test accessing a non-existent comment"""
+        if not self.access_token:
+            print("⚠️ Skipping non-existent comment test - no access token")
+            return False
+            
+        fake_comment_id = str(uuid.uuid4())
+        headers = {"Authorization": f"Bearer {self.access_token}"}
+        
+        success, response = self.run_test(
+            "Access Non-existent Comment",
+            "GET",
+            f"api/comments/{fake_comment_id}",
+            404,
+            headers=headers
+        )
+        
+        return success
+
 def main():
     print("🏍️  Starting GreaseMonkey Backend API Tests...")
     print("=" * 60)
