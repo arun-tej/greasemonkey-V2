@@ -16,13 +16,14 @@ import { Ionicons } from '@expo/vector-icons';
 const RegisterScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
+  const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { register } = useAuth();
 
   const handleRegister = async () => {
-    if (!email || !username || !password || !confirmPassword) {
+    if (!email || !username || !fullName || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
@@ -32,14 +33,19 @@ const RegisterScreen = ({ navigation }: any) => {
       return;
     }
 
-    if (password.length < 6) {
-      Alert.alert('Error', 'Password must be at least 6 characters');
+    if (password.length < 8) {
+      Alert.alert('Error', 'Password must be at least 8 characters');
       return;
     }
 
     setIsLoading(true);
     try {
-      await register(email, password, username);
+      await register({
+        email,
+        username,
+        full_name: fullName,
+        password,
+      });
     } catch (error: any) {
       Alert.alert('Registration Failed', error.message || 'Please try again');
     } finally {
