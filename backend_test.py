@@ -243,7 +243,7 @@ class GreaseMonkeyAPITester:
             "Access Protected Endpoint Without Token",
             "GET",
             "api/auth/me",
-            401  # Expecting 401 Unauthorized
+            403  # Expecting 403 Forbidden (FastAPI returns 403 for missing auth)
         )
         
         return success
