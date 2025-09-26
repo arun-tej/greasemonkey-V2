@@ -37,4 +37,4 @@ class PostResponse(Post):
     user_vote: Optional[str] = None  # "like", "dislike", or None
 
 class PostVote(BaseModel):
-    vote_type: str = Field(..., regex="^(like|dislike|remove)$")
+    vote_type: str = Field(..., pattern="^(like|dislike|remove)$")
