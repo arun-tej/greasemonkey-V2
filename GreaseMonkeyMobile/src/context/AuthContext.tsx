@@ -1,14 +1,41 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiService } from '../services/api';
-import { User, AuthResponse } from '../types';
+
+interface User {
+  id: string;
+  username: string;
+  email: string;
+  full_name: string;
+  bio?: string;
+  location?: string;
+  profile_image_url?: string;
+  created_at: string;
+  garages: string[];
+  friends: string[];
+  post_count: number;
+  ride_count: number;
+}
+
+interface AuthResponse {
+  access_token: string;
+  token_type: string;
+  user: User;
+}
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, username: string) => Promise<void>;
+  register: (userData: {
+    username: string;
+    email: string;
+    full_name: string;
+    password: string;
+    bio?: string;
+    location?: string;
+  }) => Promise<void>;
   logout: () => Promise<void>;
   updateUser: (userData: Partial<User>) => void;
 }
@@ -33,14 +60,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const checkAuthStatus = async () => {
     try {
-      const token = await AsyncStorage.getItem('authToken');
+      const token = await AsyncStorage.getItem('greasemonkey_token');
       if (token) {
         const userData = await apiService.getUserProfile();
         setUser(userData);
       }
     } catch (error) {
       console.error('Auth check failed:', error);
-      await AsyncStorage.removeItem('authToken');
+      await AsyncStorage.removeItem('greasemonkey_token');
     } finally {
       setIsLoading(false);
     }
@@ -49,17 +76,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     try {
       const response: AuthResponse = await apiService.login(email, password);
-      await AsyncStorage.setItem('authToken', response.token);
+      await AsyncStorage.setItem('greasemonkey_token', response.access_token);
       setUser(response.user);
     } catch (error) {
       throw error;
     }
   };
 
-  const register = async (email: string, password: string, username: string) => {
+  const register = async (userData: {
+    username: string;
+    email: string;
+    full_name: string;
+    password: string;
+    bio?: string;
+    location?: string;
+  }) => {
     try {
-      const response: AuthResponse = await apiService.register(email, password, username);
-      await AsyncStorage.setItem('authToken', response.token);
+      const response: AuthResponse = await apiService.register(userData);
+      await AsyncStorage.setItem('greasemonkey_token', response.access_token);
       setUser(response.user);
     } catch (error) {
       throw error;
@@ -67,7 +101,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem('authToken');
+    await AsyncStorage.removeItem('greasemonkey_token');
     setUser(null);
   };
 
