@@ -33,6 +33,8 @@ async def root():
 # Include all route modules
 api_router.include_router(auth_router)
 api_router.include_router(garage_router)
+api_router.include_router(posts_router)
+api_router.include_router(comments_router)
 
 # Include the router in the main app
 app.include_router(api_router)
