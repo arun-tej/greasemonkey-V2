@@ -152,11 +152,11 @@ backend:
 
   - task: "Posts & Media Sharing API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/models/post.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -164,14 +164,17 @@ backend:
       - working: "NA"
         agent: "main"
         comment: "Implemented posts API with create, read, update, delete, voting system, and garage integration"
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Posts & Media Sharing API fully working. Fixed Pydantic regex deprecation issue (changed regex to pattern in PostVote model). All post endpoints tested successfully: POST /api/posts/ (create general and garage posts with hashtags, images), GET /api/posts/ (posts feed with pagination and garage filtering), GET /api/posts/{post_id} (specific post retrieval), PUT /api/posts/{post_id} (author-only updates), DELETE /api/posts/{post_id} (author-only deletion with cascade comment deletion), POST /api/posts/{post_id}/vote (like/dislike/remove voting system with score calculation). Post creation, voting system, garage integration, author permissions, and counter updates all functioning correctly."
 
   - task: "Comments System API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/models/comment.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -179,6 +182,9 @@ backend:
       - working: "NA"
         agent: "main"
         comment: "Implemented comments API with CRUD operations, like system, and post integration"
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Comments System API fully working. All comment endpoints tested successfully: POST /api/comments/ (create comments with post validation and access control), GET /api/comments/?post_id={post_id} (get comments for post with pagination), GET /api/comments/{comment_id} (specific comment retrieval), PUT /api/comments/{comment_id} (author-only updates), DELETE /api/comments/{comment_id} (author-only deletion with post counter updates), POST /api/comments/{comment_id}/like (toggle like system). Comment threading, author permissions, like system, access controls for private garage posts, and proper counter updates all functioning correctly."
 
   - task: "Health Check Endpoint"
     implemented: true
