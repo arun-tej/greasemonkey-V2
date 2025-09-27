@@ -212,16 +212,40 @@ backend:
 
 frontend:
   - task: "Authentication UI Components"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/auth/"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Login/signup forms and auth context"
+
+  - task: "Navbar with Menu Button"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/layout/Navbar.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Navbar with GreaseMonkey logo, menu button next to logo, and navigation items"
+
+  - task: "Main Layout with Sidebar"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/layout/MainLayout.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Main layout with responsive sidebar and navigation"
 
   - task: "User Profile Interface"
     implemented: false
@@ -236,24 +260,24 @@ frontend:
         comment: "Profile creation and editing interface"
 
   - task: "Garage Management UI"
-    implemented: false
+    implemented: true
     working: "NA"
-    file: "/app/frontend/src/components/garage/"
+    file: "/app/frontend/src/components/garages/"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Create/join garages and community management"
 
   - task: "Posts Feed & Creation UI"
-    implemented: false
+    implemented: true
     working: "NA"
-    file: "/app/frontend/src/components/posts/"
+    file: "/app/frontend/src/components/feed/"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
