@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Home, Users, Settings, LogOut, User } from 'lucide-react';
+import { Home, Users, Settings, LogOut, User, Menu } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
