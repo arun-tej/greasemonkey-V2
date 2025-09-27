@@ -174,7 +174,7 @@ const GaragesPage = () => {
             <div>
               <h1 className="text-3xl font-bold mb-2">Garages</h1>
               <p className="text-orange-100">
-                Join communities of motorcycle enthusiasts and share your passion
+                Join communities of gearheads and share your passion
               </p>
             </div>
             <Button 
