@@ -17,6 +17,7 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -27,6 +28,12 @@ const Navbar = () => {
     { name: 'Feed', href: '/feed', icon: Home, current: location.pathname === '/feed' },
     { name: 'Garages', href: '/garages', icon: Users, current: location.pathname === '/garages' },
     { name: 'Profile', href: '/profile', icon: User, current: location.pathname === '/profile' }
+  ];
+
+  const menuItems = [
+    { name: 'Popular', href: '/popular', icon: TrendingUp },
+    { name: 'Rides', href: '/rides', icon: MapPin },
+    { name: 'Settings', href: '/settings', icon: Settings },
   ];
 
   return (
