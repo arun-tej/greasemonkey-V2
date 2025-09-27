@@ -40,8 +40,40 @@ const Navbar = () => {
     <nav className="bg-white/95 backdrop-blur-sm shadow-sm border-b border-blue-200/50 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Logo and brand with Menu Button */}
+          {/* Menu Button + Logo and brand */}
           <div className="flex items-center space-x-4">
+            {/* Menu Button with Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-2 hover:bg-blue-50 hover:text-blue-700 text-gray-600 border border-gray-300 hover:border-blue-300"
+                >
+                  <Menu className="h-4 w-4" />
+                  <span className="hidden sm:inline">Menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuLabel>Quick Access</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {menuItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <DropdownMenuItem
+                      key={item.name}
+                      onClick={() => navigate(item.href)}
+                      className="cursor-pointer"
+                    >
+                      <Icon className="mr-2 h-4 w-4" />
+                      <span>{item.name}</span>
+                    </DropdownMenuItem>
+                  );
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            {/* Logo and Brand */}
             <div 
               className="flex items-center space-x-3 cursor-pointer"
               onClick={() => navigate('/feed')}
@@ -57,20 +89,6 @@ const Navbar = () => {
                 GreaseMonkey
               </span>
             </div>
-            
-            {/* Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex items-center space-x-2 hover:bg-blue-50 hover:text-blue-700 text-gray-600 border border-gray-300 hover:border-blue-300"
-              onClick={() => {
-                // TODO: Add menu functionality - could open sidebar or dropdown
-                console.log('Menu clicked');
-              }}
-            >
-              <Menu className="h-4 w-4" />
-              <span className="hidden sm:inline">Menu</span>
-            </Button>
           </div>
 
           {/* Navigation links */}
