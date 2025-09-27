@@ -242,7 +242,7 @@ const RightSidebar = () => {
         <CardContent className="p-4 text-center">
           <div className="w-12 h-12 mx-auto mb-3">
             <img 
-              src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/lz1argy3_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png" 
+              src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/ly6ycfum_Gemini_Generated_Image_ni2zlyni2zlyni2z.svg" 
               alt="GreaseMonkey Logo" 
               className="w-full h-full object-contain"
             />
