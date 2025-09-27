@@ -46,7 +46,7 @@ const Navbar = () => {
                   className="w-7 h-7 object-contain"
                 />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="text-xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide" style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
                 GreaseMonkey
               </span>
             </div>
