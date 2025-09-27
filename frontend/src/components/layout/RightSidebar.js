@@ -240,11 +240,11 @@ const RightSidebar = () => {
       {/* GreaseMonkey Info */}
       <Card className="border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50">
         <CardContent className="p-4 text-center">
-          <div className="w-12 h-12 mx-auto mb-3">
+          <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-white rounded-xl shadow-lg border-2 border-blue-100">
             <img 
               src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/ly6ycfum_Gemini_Generated_Image_ni2zlyni2zlyni2z.svg" 
               alt="GreaseMonkey Logo" 
-              className="w-full h-full object-contain"
+              className="w-12 h-12 object-contain"
             />
           </div>
           <h4 className="text-sm font-semibold text-gray-900 mb-2">
