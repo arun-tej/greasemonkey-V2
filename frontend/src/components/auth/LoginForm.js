@@ -38,23 +38,23 @@ const LoginForm = ({ onSwitchToRegister }) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
-        <CardDescription className="text-center">
+    <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+      <CardHeader className="space-y-1 pb-4">
+        <CardTitle className="text-2xl font-bold text-center text-gray-800">Welcome Back</CardTitle>
+        <CardDescription className="text-center text-gray-600">
           Sign in to your GreaseMonkey account
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant="destructive" className="bg-red-50 border-red-200">
+              <AlertDescription className="text-red-700">{error}</AlertDescription>
             </Alert>
           )}
           
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-gray-700 font-medium">Email</Label>
             <Input
               id="email"
               name="email"
@@ -64,11 +64,12 @@ const LoginForm = ({ onSwitchToRegister }) => {
               onChange={handleChange}
               required
               disabled={loading}
+              className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
             />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
             <Input
               id="password"
               name="password"
@@ -78,6 +79,7 @@ const LoginForm = ({ onSwitchToRegister }) => {
               onChange={handleChange}
               required
               disabled={loading}
+              className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
             />
           </div>
         </CardContent>
@@ -85,7 +87,7 @@ const LoginForm = ({ onSwitchToRegister }) => {
         <CardFooter className="flex flex-col space-y-4">
           <Button 
             type="submit" 
-            className="w-full"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium"
             disabled={loading}
           >
             {loading ? (
@@ -98,11 +100,11 @@ const LoginForm = ({ onSwitchToRegister }) => {
             )}
           </Button>
           
-          <p className="text-sm text-center text-muted-foreground">
+          <p className="text-sm text-center text-gray-600">
             Don't have an account?{' '}
             <Button
               variant="link"
-              className="p-0 h-auto"
+              className="p-0 h-auto text-blue-600 hover:text-blue-800 font-medium"
               onClick={onSwitchToRegister}
               disabled={loading}
             >
