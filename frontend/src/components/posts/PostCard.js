@@ -265,7 +265,7 @@ const PostCard = ({ post, onUpdate, onCommentClick, compact = false }) => {
                     <Badge 
                       key={index} 
                       variant="secondary" 
-                      className="text-xs cursor-pointer hover:bg-orange-100 hover:text-orange-700"
+                      className="text-xs cursor-pointer hover:bg-amber-100 hover:text-amber-800 transition-colors"
                       onClick={() => navigate(`/search?tag=${tag}`)}
                     >
                       #{tag}
