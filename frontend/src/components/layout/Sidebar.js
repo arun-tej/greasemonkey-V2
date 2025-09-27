@@ -97,7 +97,7 @@ const Sidebar = () => {
             <div className="space-y-1">
               {garages.length === 0 ? (
                 <div className="text-center py-8">
-                  <Motorcycle className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                  <Bike className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                   <p className="text-sm text-gray-500 mb-3">
                     Join or create your first garage to get started!
                   </p>
