@@ -108,11 +108,11 @@ const PostCard = ({ post, onUpdate, onCommentClick, compact = false }) => {
   const voteScore = (post.like_count || 0) - (post.dislike_count || 0);
 
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow duration-200 border-l-4 border-l-transparent hover:border-l-orange-500">
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-200 border-l-4 border-l-transparent hover:border-l-amber-500 bg-white/90 backdrop-blur-sm">
       <CardContent className="p-0">
         <div className="flex">
           {/* Left side - Voting (Reddit style) */}
-          <div className="flex flex-col items-center justify-start p-4 bg-gray-50 min-w-[60px]">
+          <div className="flex flex-col items-center justify-start p-4 bg-gradient-to-b from-gray-50 to-amber-50/30 min-w-[60px] border-r border-amber-100">
             <Button
               variant="ghost"
               size="sm"
@@ -120,16 +120,16 @@ const PostCard = ({ post, onUpdate, onCommentClick, compact = false }) => {
               disabled={isVoting}
               className={`p-1 h-8 w-8 mb-1 ${
                 userVote === 'like' 
-                  ? 'text-orange-500 bg-orange-50 hover:bg-orange-100' 
-                  : 'text-gray-400 hover:text-orange-500 hover:bg-orange-50'
+                  ? 'text-amber-600 bg-amber-100 hover:bg-amber-200' 
+                  : 'text-gray-400 hover:text-amber-600 hover:bg-amber-50'
               }`}
             >
               <ArrowUp className="h-4 w-4" />
             </Button>
             
             <div className={`text-sm font-bold py-1 ${
-              voteScore > 0 ? 'text-orange-500' : 
-              voteScore < 0 ? 'text-blue-500' : 'text-gray-500'
+              voteScore > 0 ? 'text-amber-600' : 
+              voteScore < 0 ? 'text-blue-600' : 'text-gray-500'
             }`}>
               {voteScore > 0 && '+'}{voteScore}
             </div>
@@ -141,8 +141,8 @@ const PostCard = ({ post, onUpdate, onCommentClick, compact = false }) => {
               disabled={isVoting}
               className={`p-1 h-8 w-8 mt-1 ${
                 userVote === 'dislike' 
-                  ? 'text-blue-500 bg-blue-50 hover:bg-blue-100' 
-                  : 'text-gray-400 hover:text-blue-500 hover:bg-blue-50'
+                  ? 'text-blue-600 bg-blue-100 hover:bg-blue-200' 
+                  : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
               }`}
             >
               <ArrowDown className="h-4 w-4" />
