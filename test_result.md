@@ -305,10 +305,7 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "Navbar with Menu Button"
-    - "Authentication UI Components"
-    - "Main Layout with Sidebar"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
