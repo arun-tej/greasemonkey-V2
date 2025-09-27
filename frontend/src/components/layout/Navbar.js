@@ -158,18 +158,6 @@ const Navbar = () => {
       {/* Mobile navigation */}
       <div className="md:hidden border-t bg-white/95 backdrop-blur-sm border-blue-200/50">
         <div className="px-2 pt-2 pb-3 space-y-1">
-          {/* Mobile menu header */}
-          <div className="flex items-center justify-between px-3 py-2 mb-2">
-            <span className="text-sm font-semibold text-gray-700">Navigation</span>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hover:bg-blue-50"
-            >
-              <Menu className="h-4 w-4" />
-            </Button>
-          </div>
-          
           {navigation.map((item) => {
             const Icon = item.icon;
             return (
