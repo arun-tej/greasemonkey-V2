@@ -17,11 +17,11 @@ const AuthPage = () => {
               className="w-14 h-14 object-contain"
             />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-3xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2 tracking-wide" style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
             GreaseMonkey
           </h1>
           <p className="text-gray-500 text-sm">
-            Welcome to the motorcycle community
+            Welcome to the gearhead community
           </p>
         </div>
         
