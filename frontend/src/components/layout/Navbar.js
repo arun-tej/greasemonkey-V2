@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Home, Users, Settings, LogOut, User, Menu } from 'lucide-react';
+import { Home, Users, Settings, LogOut, User, Menu, MapPin, TrendingUp } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
