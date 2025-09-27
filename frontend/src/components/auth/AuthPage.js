@@ -6,23 +6,23 @@ const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto">
         {/* Centered Logo */}
         <div className="text-center mb-8">
-          <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+          <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center bg-white rounded-full shadow-lg border border-gray-100">
             <img 
               src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/lz1argy3_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png" 
               alt="GreaseMonkey Logo" 
-              className="w-full h-full object-contain drop-shadow-2xl"
-              style={{
-                filter: 'drop-shadow(0 0 20px rgba(139, 69, 19, 0.5))'
-              }}
+              className="w-14 h-14 object-contain"
             />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
             GreaseMonkey
           </h1>
+          <p className="text-gray-500 text-sm">
+            Welcome to the motorcycle community
+          </p>
         </div>
         
         {/* Auth Forms */}
