@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Bike, Home, Users, Settings, LogOut, User } from 'lucide-react';
+import { Home, Users, Settings, LogOut, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -30,23 +30,28 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-sm border-b">
+    <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Logo and brand */}
+          {/* Logo and brand - Centered */}
           <div className="flex items-center">
             <div 
-              className="flex items-center space-x-2 cursor-pointer"
+              className="flex items-center space-x-3 cursor-pointer"
               onClick={() => navigate('/feed')}
             >
-              <div className="w-8 h-8">
+              <div className="w-10 h-10 flex items-center justify-center">
                 <img 
                   src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/lz1argy3_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png" 
                   alt="GreaseMonkey Logo" 
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain drop-shadow-lg"
+                  style={{
+                    filter: 'drop-shadow(0 2px 8px rgba(139, 69, 19, 0.3))'
+                  }}
                 />
               </div>
-              <span className="text-xl font-bold text-gray-900">GreaseMonkey</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                GreaseMonkey
+              </span>
             </div>
           </div>
 
@@ -60,8 +65,8 @@ const Navbar = () => {
                   variant={item.current ? "default" : "ghost"}
                   className={`flex items-center space-x-2 ${
                     item.current 
-                      ? 'bg-orange-500 hover:bg-orange-600' 
-                      : 'hover:bg-gray-100'
+                      ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white' 
+                      : 'hover:bg-amber-50 hover:text-amber-700'
                   }`}
                   onClick={() => navigate(item.href)}
                 >
@@ -77,9 +82,9 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-8 w-8 ring-2 ring-amber-200">
                     <AvatarImage src={user?.profile_image_url} alt={user?.username} />
-                    <AvatarFallback>
+                    <AvatarFallback className="bg-gradient-to-br from-amber-400 to-orange-500 text-white font-semibold">
                       {user?.full_name?.charAt(0)?.toUpperCase() || 'U'}
                     </AvatarFallback>
                   </Avatar>
@@ -125,8 +130,8 @@ const Navbar = () => {
                 variant={item.current ? "default" : "ghost"}
                 className={`w-full justify-start space-x-2 ${
                   item.current 
-                    ? 'bg-orange-500 hover:bg-orange-600' 
-                    : 'hover:bg-gray-100'
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white' 
+                    : 'hover:bg-amber-50 hover:text-amber-700'
                 }`}
                 onClick={() => navigate(item.href)}
               >
