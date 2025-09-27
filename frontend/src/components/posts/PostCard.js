@@ -165,7 +165,7 @@ const PostCard = ({ post, onUpdate, onCommentClick, compact = false }) => {
                   {post.garage_name && (
                     <button
                       onClick={() => navigate(`/g/${post.garage_id}`)}
-                      className="font-bold text-gray-900 hover:text-orange-600 flex items-center"
+                      className="font-bold text-gray-900 hover:text-amber-600 flex items-center transition-colors"
                     >
                       <Users className="h-3 w-3 mr-1" />
                       g/{post.garage_name}
