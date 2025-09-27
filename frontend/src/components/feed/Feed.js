@@ -119,7 +119,7 @@ const Feed = () => {
                 Welcome back, {user?.full_name?.split(' ')[0]}! 🏍️
               </h1>
               <p className="text-blue-100">
-                What's happening in the motorcycle community today?
+                What's happening in the gearhead community today?
               </p>
             </div>
             <CreatePostDialog onPostCreated={handlePostCreated} />
