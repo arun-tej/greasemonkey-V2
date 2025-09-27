@@ -44,7 +44,7 @@ const LoginScreen = ({ navigation }: any) => {
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <Image 
-              source={{ uri: 'https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/lz1argy3_Gemini_Generated_Image_bhb3n2bhb3n2bhb3.png' }}
+              source={{ uri: 'https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/ly6ycfum_Gemini_Generated_Image_ni2zlyni2zlyni2z.svg' }}
               style={styles.logo}
               resizeMode="contain"
             />
