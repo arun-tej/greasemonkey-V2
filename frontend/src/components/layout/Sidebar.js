@@ -10,7 +10,7 @@ import {
   Users, 
   Plus,
   Settings,
-  Motorcycle,
+  Bike,
   MapPin,
   Star
 } from 'lucide-react';
