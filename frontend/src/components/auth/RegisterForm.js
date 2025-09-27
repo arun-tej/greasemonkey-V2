@@ -68,24 +68,24 @@ const RegisterForm = ({ onSwitchToLogin }) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">Join GreaseMonkey</CardTitle>
-        <CardDescription className="text-center">
+    <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+      <CardHeader className="space-y-1 pb-4">
+        <CardTitle className="text-2xl font-bold text-center text-gray-800">Join GreaseMonkey</CardTitle>
+        <CardDescription className="text-center text-gray-600">
           Create your account and connect with riders
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant="destructive" className="bg-red-50 border-red-200">
+              <AlertDescription className="text-red-700">{error}</AlertDescription>
             </Alert>
           )}
           
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username" className="text-gray-700 font-medium">Username</Label>
               <Input
                 id="username"
                 name="username"
@@ -97,11 +97,12 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 disabled={loading}
                 minLength={3}
                 maxLength={20}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="full_name">Full Name</Label>
+              <Label htmlFor="full_name" className="text-gray-700 font-medium">Full Name</Label>
               <Input
                 id="full_name"
                 name="full_name"
@@ -112,11 +113,12 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 required
                 disabled={loading}
                 maxLength={50}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-gray-700 font-medium">Email</Label>
               <Input
                 id="email"
                 name="email"
@@ -126,11 +128,12 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 onChange={handleChange}
                 required
                 disabled={loading}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
               <Input
                 id="password"
                 name="password"
@@ -141,11 +144,12 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 required
                 disabled={loading}
                 minLength={8}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" className="text-gray-700 font-medium">Confirm Password</Label>
               <Input
                 id="confirmPassword"
                 name="confirmPassword"
@@ -155,11 +159,12 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 onChange={handleChange}
                 required
                 disabled={loading}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="location">Location (Optional)</Label>
+              <Label htmlFor="location" className="text-gray-700 font-medium">Location (Optional)</Label>
               <Input
                 id="location"
                 name="location"
@@ -169,11 +174,12 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 onChange={handleChange}
                 disabled={loading}
                 maxLength={100}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="bio">Bio (Optional)</Label>
+              <Label htmlFor="bio" className="text-gray-700 font-medium">Bio (Optional)</Label>
               <Textarea
                 id="bio"
                 name="bio"
@@ -183,6 +189,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
                 disabled={loading}
                 maxLength={500}
                 rows={3}
+                className="border-gray-300 focus:border-blue-500 focus:ring-blue-200 bg-white"
               />
             </div>
           </div>
@@ -191,7 +198,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
         <CardFooter className="flex flex-col space-y-4">
           <Button 
             type="submit" 
-            className="w-full"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium"
             disabled={loading}
           >
             {loading ? (
@@ -204,11 +211,11 @@ const RegisterForm = ({ onSwitchToLogin }) => {
             )}
           </Button>
           
-          <p className="text-sm text-center text-muted-foreground">
+          <p className="text-sm text-center text-gray-600">
             Already have an account?{' '}
             <Button
               variant="link"
-              className="p-0 h-auto"
+              className="p-0 h-auto text-blue-600 hover:text-blue-800 font-medium"
               onClick={onSwitchToLogin}
               disabled={loading}
             >
