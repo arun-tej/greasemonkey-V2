@@ -176,7 +176,7 @@ const PostCard = ({ post, onUpdate, onCommentClick, compact = false }) => {
                     Posted by{' '}
                     <button
                       onClick={() => navigate(`/u/${post.author_username}`)}
-                      className="text-gray-900 hover:text-orange-600 font-medium"
+                      className="text-gray-900 hover:text-amber-600 font-medium transition-colors"
                     >
                       u/{post.author_username}
                     </button>
