@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation }: any) => {
             />
           </View>
           <Text style={styles.title}>GreaseMonkey</Text>
-          <Text style={styles.subtitle}>Connect. Ride. Share.</Text>
+          <Text style={styles.subtitle}>Welcome to the gearhead community</Text>
         </View>
 
         <View style={styles.form}>
