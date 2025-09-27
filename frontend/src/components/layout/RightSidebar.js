@@ -251,7 +251,7 @@ const RightSidebar = () => {
             Welcome to GreaseMonkey
           </h4>
           <p className="text-xs text-gray-600 mb-3">
-            Connect, ride, and share with the motorcycle community worldwide.
+            Connect, ride, and share with the gearhead community worldwide.
           </p>
           <Button size="sm" variant="outline" className="w-full">
             Learn More
