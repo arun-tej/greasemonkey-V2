@@ -111,14 +111,14 @@ const Feed = () => {
   return (
     <div className="space-y-4">
       {/* Header with controls */}
-      <Card className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white border-0 shadow-lg">
+      <Card className="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 text-white border-0 shadow-lg">
         <CardContent className="p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl font-bold mb-2">
                 Welcome back, {user?.full_name?.split(' ')[0]}! 🏍️
               </h1>
-              <p className="text-amber-100">
+              <p className="text-blue-100">
                 What's happening in the motorcycle community today?
               </p>
             </div>
@@ -128,7 +128,7 @@ const Feed = () => {
       </Card>
 
       {/* Sorting and filtering */}
-      <Card className="shadow-sm border-amber-200/50">
+      <Card className="shadow-sm border-blue-200/50 bg-white/80 backdrop-blur-sm">
         <CardContent className="p-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
@@ -143,8 +143,8 @@ const Feed = () => {
                       onClick={() => setSortBy(option.value)}
                       className={`flex items-center space-x-2 ${
                         sortBy === option.value 
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white' 
-                          : 'hover:bg-amber-50 hover:text-amber-700 hover:border-amber-300 border-gray-300'
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white' 
+                          : 'hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border-gray-300 text-gray-600'
                       }`}
                     >
                       <Icon className="h-4 w-4" />
@@ -154,10 +154,10 @@ const Feed = () => {
                 })}
               </div>
               
-              <div className="border-l border-amber-300 h-6" />
+              <div className="border-l border-blue-300 h-6" />
               
               <Select value={filter} onValueChange={setFilter}>
-                <SelectTrigger className="w-40 border-gray-300 hover:border-amber-400 focus:border-amber-500 focus:ring-amber-200">
+                <SelectTrigger className="w-40 border-gray-300 hover:border-blue-400 focus:border-blue-500 focus:ring-blue-200">
                   <Filter className="h-4 w-4 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
@@ -176,7 +176,7 @@ const Feed = () => {
               size="sm"
               onClick={() => loadPosts(true)}
               disabled={refreshing}
-              className="hover:bg-amber-50 hover:text-amber-700 hover:border-amber-300 border-gray-300"
+              className="hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 border-gray-300 text-gray-600"
             >
               <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
               Refresh
