@@ -11,6 +11,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { apiService } from '../../services/api';
 import { Post } from '../../types';
+import { theme } from '../../styles/theme';
+import { Card, Button } from '../../components/ui';
 
 const FeedScreen = ({ navigation }: any) => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -24,7 +26,7 @@ const FeedScreen = ({ navigation }: any) => {
   const loadPosts = async () => {
     try {
       const response = await apiService.getPosts();
-      setPosts(response.items);
+      setPosts((response as any)?.items || []);
     } catch (error) {
       console.error('Error loading posts:', error);
     } finally {
@@ -39,52 +41,53 @@ const FeedScreen = ({ navigation }: any) => {
   };
 
   const renderPost = ({ item }: { item: Post }) => (
-    <TouchableOpacity 
-      style={styles.postCard}
-      onPress={() => navigation.navigate('PostDetail', { postId: item.id })}
-    >
-      <View style={styles.postHeader}>
-        <View style={styles.authorInfo}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>
-              {item.author.username.charAt(0).toUpperCase()}
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.authorName}>{item.author.username}</Text>
-            <Text style={styles.garageName}>{item.garage.name}</Text>
-          </View>
-        </View>
-        <Text style={styles.timestamp}>
-          {new Date(item.createdAt).toLocaleDateString()}
-        </Text>
-      </View>
-
-      <Text style={styles.postTitle}>{item.title}</Text>
-      <Text style={styles.postBody} numberOfLines={3}>
-        {item.body}
-      </Text>
-
-      <View style={styles.postFooter}>
-        <View style={styles.scoreContainer}>
-          <Ionicons name="arrow-up" size={16} color="#FF6B35" />
-          <Text style={styles.scoreText}>{item.score}</Text>
-        </View>
-        <View style={styles.tagsContainer}>
-          {item.tags.map((tag, index) => (
-            <View key={index} style={styles.tag}>
-              <Text style={styles.tagText}>#{tag}</Text>
+    <Card style={styles.postCard}>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate('PostDetail', { postId: item.id })}
+      >
+        <View style={styles.postHeader}>
+          <View style={styles.authorInfo}>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>
+                {item.author.username.charAt(0).toUpperCase()}
+              </Text>
             </View>
-          ))}
+            <View>
+              <Text style={styles.authorName}>{item.author.username}</Text>
+              <Text style={styles.garageName}>{item.garage.name}</Text>
+            </View>
+          </View>
+          <Text style={styles.timestamp}>
+            {new Date(item.createdAt).toLocaleDateString()}
+          </Text>
         </View>
-      </View>
-    </TouchableOpacity>
+
+        <Text style={styles.postTitle}>{item.title}</Text>
+        <Text style={styles.postBody} numberOfLines={3}>
+          {item.body}
+        </Text>
+
+        <View style={styles.postFooter}>
+          <View style={styles.scoreContainer}>
+            <Ionicons name="arrow-up" size={16} color={theme.colors.primary.orange} />
+            <Text style={styles.scoreText}>{item.score}</Text>
+          </View>
+          <View style={styles.tagsContainer}>
+            {item.tags.map((tag, index) => (
+              <View key={index} style={styles.tag}>
+                <Text style={styles.tagText}>#{tag}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      </TouchableOpacity>
+    </Card>
   );
 
   if (isLoading) {
     return (
       <View style={[styles.container, styles.centered]}>
-        <ActivityIndicator size="large" color="#FF6B35" />
+        <ActivityIndicator size="large" color={theme.colors.primary.orange} />
         <Text style={styles.loadingText}>Loading feed...</Text>
       </View>
     );
@@ -98,7 +101,7 @@ const FeedScreen = ({ navigation }: any) => {
           style={styles.createButton}
           onPress={() => navigation.navigate('CreatePost')}
         >
-          <Ionicons name="add" size={24} color="#FF6B35" />
+          <Ionicons name="add" size={24} color={theme.colors.primary.orange} />
         </TouchableOpacity>
       </View>
 
@@ -119,7 +122,7 @@ const FeedScreen = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A1A',
+    backgroundColor: theme.colors.background.DEFAULT,
   },
   centered: {
     justifyContent: 'center',
@@ -129,38 +132,39 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: theme.spacing.xl,
     paddingTop: 60,
-    paddingBottom: 20,
-    backgroundColor: '#1A1A1A',
+    paddingBottom: theme.spacing.xl,
+    backgroundColor: theme.colors.background.DEFAULT,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.border,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
+    fontSize: theme.typography.fontSize['3xl'],
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.foreground.DEFAULT,
   },
   createButton: {
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#2A2A2A',
+    backgroundColor: theme.colors.background.secondary,
     justifyContent: 'center',
     alignItems: 'center',
+    ...theme.shadows.sm,
   },
   listContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: theme.spacing.xl,
+    paddingTop: theme.spacing.lg,
   },
   postCard: {
-    backgroundColor: '#2A2A2A',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
+    marginBottom: theme.spacing.lg,
   },
   postHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: theme.spacing.md,
   },
   authorInfo: {
     flexDirection: 'row',
@@ -170,40 +174,40 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FF6B35',
+    backgroundColor: theme.colors.primary.orange,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
+    marginRight: theme.spacing.md,
   },
   avatarText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 16,
+    color: theme.colors.primary.foreground,
+    fontWeight: theme.typography.fontWeight.bold,
+    fontSize: theme.typography.fontSize.base,
   },
   authorName: {
-    color: '#FFFFFF',
-    fontWeight: '600',
-    fontSize: 14,
+    color: theme.colors.foreground.DEFAULT,
+    fontWeight: theme.typography.fontWeight.semibold,
+    fontSize: theme.typography.fontSize.sm,
   },
   garageName: {
-    color: '#666',
-    fontSize: 12,
+    color: theme.colors.foreground.muted,
+    fontSize: theme.typography.fontSize.xs,
   },
   timestamp: {
-    color: '#666',
-    fontSize: 12,
+    color: theme.colors.foreground.muted,
+    fontSize: theme.typography.fontSize.xs,
   },
   postTitle: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 8,
+    color: theme.colors.foreground.DEFAULT,
+    fontSize: theme.typography.fontSize.lg,
+    fontWeight: theme.typography.fontWeight.semibold,
+    marginBottom: theme.spacing.sm,
   },
   postBody: {
-    color: '#CCC',
-    fontSize: 14,
+    color: theme.colors.foreground.muted,
+    fontSize: theme.typography.fontSize.sm,
     lineHeight: 20,
-    marginBottom: 12,
+    marginBottom: theme.spacing.md,
   },
   postFooter: {
     flexDirection: 'row',
@@ -215,30 +219,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scoreText: {
-    color: '#FF6B35',
+    color: theme.colors.primary.orange,
     marginLeft: 4,
-    fontWeight: '600',
+    fontWeight: theme.typography.fontWeight.semibold,
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   tag: {
-    backgroundColor: '#FF6B35',
-    paddingHorizontal: 8,
+    backgroundColor: theme.colors.primary.orange,
+    paddingHorizontal: theme.spacing.sm,
     paddingVertical: 4,
-    borderRadius: 12,
+    borderRadius: theme.borderRadius.md,
     marginLeft: 4,
   },
   tagText: {
-    color: '#FFFFFF',
+    color: theme.colors.primary.foreground,
     fontSize: 10,
-    fontWeight: '500',
+    fontWeight: theme.typography.fontWeight.medium,
   },
   loadingText: {
-    color: '#666',
+    color: theme.colors.foreground.muted,
     marginTop: 10,
-    fontSize: 16,
+    fontSize: theme.typography.fontSize.base,
   },
 });
 

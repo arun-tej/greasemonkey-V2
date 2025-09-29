@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
-import { Alert, AlertDescription } from '../ui/alert';
-import { Textarea } from '../ui/textarea';
+import { Button } from '../ui/button.jsx';
+import { Input } from '../ui/input.jsx';
+import { Label } from '../ui/label.jsx';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card.jsx';
+import { Alert, AlertDescription } from '../ui/alert.jsx';
+import { Textarea } from '../ui/textarea.jsx';
 import { Loader2 } from 'lucide-react';
+import SocialLoginButtons from './SocialLoginButtons';
 
 const RegisterForm = ({ onSwitchToLogin }) => {
-  const { register } = useAuth();
+  const { register, socialLogin } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -67,12 +68,26 @@ const RegisterForm = ({ onSwitchToLogin }) => {
     }));
   };
 
+  const handleSocialLogin = async (provider, credentials) => {
+    setLoading(true);
+    setError('');
+
+    const result = await socialLogin(provider, credentials);
+    
+    if (!result.success) {
+      setError(result.error);
+    }
+    
+    setLoading(false);
+    return result;
+  };
+
   return (
     <Card className="w-full max-w-md mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
       <CardHeader className="space-y-1 pb-4">
         <CardTitle className="text-2xl font-bold text-center text-gray-800">Join GreaseMonkey</CardTitle>
         <CardDescription className="text-center text-gray-600">
-          Create your account and connect with riders
+          Create your account and connect with motor heads
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -210,6 +225,9 @@ const RegisterForm = ({ onSwitchToLogin }) => {
               'Create Account'
             )}
           </Button>
+          
+          {/* Social Login Buttons */}
+          <SocialLoginButtons onSocialLogin={handleSocialLogin} loading={loading} />
           
           <p className="text-sm text-center text-gray-600">
             Already have an account?{' '}

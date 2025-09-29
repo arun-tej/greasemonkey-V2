@@ -51,22 +51,29 @@ const Feed = () => {
         params.garage_only = true;
       }
 
-      const response = await axios.get(`${API_BASE}/posts/`, { params });
+      const response = await axios.get(`${API_BASE}/posts`, { params });
       
-      let sortedPosts = response.data;
+      // Handle both possible response formats
+      let postsData = response.data.posts || response.data || [];
+      
+      // Ensure we have an array
+      if (!Array.isArray(postsData)) {
+        postsData = [];
+      }
       
       // Sort posts based on selection
       if (sortBy === 'hot') {
-        sortedPosts = sortedPosts.sort((a, b) => (b.score || 0) - (a.score || 0));
+        postsData = postsData.sort((a, b) => (b.score || 0) - (a.score || 0));
       } else if (sortBy === 'top') {
-        sortedPosts = sortedPosts.sort((a, b) => (b.like_count || 0) - (a.like_count || 0));
+        postsData = postsData.sort((a, b) => (b.like_count || 0) - (a.like_count || 0));
       }
       // 'new' is default from API (sorted by created_at)
       
-      setPosts(sortedPosts);
+      setPosts(postsData);
     } catch (error) {
       console.error('Error loading posts:', error);
       toast.error('Failed to load posts');
+      setPosts([]); // Ensure posts is always an array
     }
     
     setLoading(false);
@@ -119,7 +126,7 @@ const Feed = () => {
                 Welcome back, {user?.full_name?.split(' ')[0]}! 🏍️
               </h1>
               <p className="text-blue-100">
-                What's happening in the gearhead community today?
+                What's happening in the World of Motor Heads today?
               </p>
             </div>
             <CreatePostDialog onPostCreated={handlePostCreated} />

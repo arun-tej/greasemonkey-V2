@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreaseMonkey V2 - Web Demo</title>
+    <script src="https://unpkg.com/react@19/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@19/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin: 10px 0;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-card h3 {
+            color: #ff6b35;
+            margin-top: 0;
+        }
+        .api-demo {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .api-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .api-status.online {
+            background: #4caf50;
+            color: white;
+        }
+        .api-status.offline {
+            background: #f44336;
+            color: white;
+        }
+        .posts {
+            margin: 20px 0;
+        }
+        .post {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+        .post h4 {
+            margin: 0 0 5px 0;
+            color: #ff6b35;
+        }
+        .post-meta {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏍️ GreaseMonkey V2</h1>
+            <p>Social Platform for Motorcycle Enthusiasts</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>📱 Mobile First</h3>
+                <p>React Native mobile app with location services, maps integration, and native performance for riders on the go.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌐 Web Platform</h3>
+                <p>Modern React web application with responsive design, real-time feeds, and comprehensive garage management.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Fast API</h3>
+                <p>Python FastAPI backend with MongoDB, async processing, and comprehensive authentication system.</p>
+            </div>
+        </div>
+
+        <div class="api-demo">
+            <h3>🔗 API Status</h3>
+            <div id="api-status">
+                <span class="api-status offline">Checking...</span>
+            </div>
+            
+            <div id="posts-demo">
+                <h4>📝 Latest Posts</h4>
+                <div id="posts-container">Loading posts...</div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <h3>🚀 Ready to Experience GreaseMonkey?</h3>
+            <p>Choose your platform:</p>
+            <a href="http://localhost:8081" class="btn">📱 Mobile Web (Expo)</a>
+            <a href="http://localhost:8000/docs" class="btn">🔗 API Documentation</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>🏗️ Project Structure</h3>
+                <ul>
+                    <li><strong>Backend:</strong> FastAPI + MongoDB</li>
+                    <li><strong>Frontend:</strong> React + TailwindCSS</li>
+                    <li><strong>Mobile:</strong> React Native + Expo</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>🎯 Key Features</h3>
+                <ul>
+                    <li>User Authentication & Profiles</li>
+                    <li>Post Creation & Social Feed</li>
+                    <li>Garage Management</li>
+                    <li>Real-time Comments</li>
+                    <li>Location Services</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        // Check API status
+        async function checkAPI() {
+            try {
+                const response = await fetch('http://localhost:8000/api/health');
+                const data = await response.json();
+                
+                document.getElementById('api-status').innerHTML = 
+                    '<span class="api-status online">✅ API Online</span>';
+                
+                // Load posts
+                loadPosts();
+            } catch (error) {
+                document.getElementById('api-status').innerHTML = 
+                    '<span class="api-status offline">❌ API Offline</span>';
+            }
+        }
+
+        async function loadPosts() {
+            try {
+                const response = await fetch('http://localhost:8000/api/posts');
+                const data = await response.json();
+                
+                const postsHtml = data.posts.map(post => `
+                    <div class="post">
+                        <h4>${post.title}</h4>
+                        <p>${post.content}</p>
+                        <div class="post-meta">By ${post.author} • ${new Date(post.created_at).toLocaleDateString()}</div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('posts-container').innerHTML = postsHtml;
+            } catch (error) {
+                document.getElementById('posts-container').innerHTML = 
+                    '<p style="color: #f44336;">Failed to load posts</p>';
+            }
+        }
+
+        // Check API on page load
+        checkAPI();
+        
+        // Refresh every 30 seconds
+        setInterval(checkAPI, 30000);
+    </script>
+</body>
+</html>

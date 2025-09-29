@@ -1,12 +1,17 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from "./contexts/AuthContext";
 import Layout from "./components/layout/Layout";
 import MainLayout from "./components/layout/MainLayout";
 import Feed from "./components/feed/Feed";
+import FeedLayout from "./components/feed/FeedLayout";
+import ResponsiveFeedPage from "./components/feed/ResponsiveFeedPage";
 import GaragesPage from "./components/garages/GaragesPage";
+import ProfilePage from "./components/profile/ProfilePage";
 import { Toaster } from "./components/ui/sonner";
+import { SOCIAL_CONFIG } from "./config/social-config";
 
 // Placeholder components for routes
 const Popular = () => (
@@ -23,36 +28,32 @@ const Rides = () => (
   </div>
 );
 
-const Profile = () => (
-  <div className="text-center py-12">
-    <h1 className="text-2xl font-bold mb-4">Profile</h1>
-    <p className="text-gray-600">Profile page coming soon...</p>
-  </div>
-);
+const Profile = () => <ProfilePage />;
 
 const AuthenticatedApp = () => (
-  <MainLayout>
-    <Routes>
-      <Route path="/" element={<Navigate to="/feed" replace />} />
-      <Route path="/feed" element={<Feed />} />
-      <Route path="/popular" element={<Popular />} />
-      <Route path="/garages" element={<GaragesPage />} />
-      <Route path="/rides" element={<Rides />} />
-      <Route path="/profile" element={<Profile />} />
-    </Routes>
-  </MainLayout>
+  <Routes>
+    <Route path="/" element={<Navigate to="/feed" replace />} />
+    <Route path="/feed" element={<ResponsiveFeedPage />} />
+    <Route path="/classic-feed" element={<MainLayout><Feed /></MainLayout>} />
+    <Route path="/popular" element={<MainLayout><Popular /></MainLayout>} />
+    <Route path="/garages" element={<MainLayout><GaragesPage /></MainLayout>} />
+    <Route path="/rides" element={<MainLayout><Rides /></MainLayout>} />
+    <Route path="/profile" element={<MainLayout><Profile /></MainLayout>} />
+  </Routes>
 );
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Layout>
-          <AuthenticatedApp />
-        </Layout>
-        <Toaster />
-      </AuthProvider>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={SOCIAL_CONFIG.google.clientId}>
+      <BrowserRouter>
+        <AuthProvider>
+          <Layout>
+            <AuthenticatedApp />
+          </Layout>
+          <Toaster />
+        </AuthProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 }
 

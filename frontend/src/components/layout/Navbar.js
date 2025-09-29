@@ -78,13 +78,11 @@ const Navbar = () => {
               className="flex items-center space-x-3 cursor-pointer"
               onClick={() => navigate('/feed')}
             >
-              <div className="w-12 h-12 flex items-center justify-center bg-white rounded-xl shadow-lg border-2 border-blue-200 hover:shadow-xl transition-all duration-200">
-                <img 
-                  src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/ly6ycfum_Gemini_Generated_Image_ni2zlyni2zlyni2z.svg" 
-                  alt="GreaseMonkey Logo" 
-                  className="w-9 h-9 object-contain"
-                />
-              </div>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/ly6ycfum_Gemini_Generated_Image_ni2zlyni2zlyni2z.svg" 
+                alt="GreaseMonkey Logo" 
+                className="w-16 h-16 object-contain object-center"
+              />
               <span className="text-2xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide" style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
                 GreaseMonkey
               </span>

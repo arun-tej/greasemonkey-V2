@@ -16,8 +16,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('greasemonkey_token'));
   const [loading, setLoading] = useState(true);
 
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-  const API_BASE = `${BACKEND_URL}/api`;
+  const BACKEND_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+  const API_BASE = `${BACKEND_URL}`;
 
   // Configure axios default headers
   useEffect(() => {
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     const loadUser = async () => {
       if (token) {
         try {
-          const response = await axios.get(`${API_BASE}/auth/me`);
+          const response = await axios.get(`${API_BASE}/api/auth/me`);
           setUser(response.data);
         } catch (error) {
           console.error('Failed to load user:', error);
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${API_BASE}/auth/login`, {
+      const response = await axios.post(`${API_BASE}/api/auth/login`, {
         email,
         password
       });
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post(`${API_BASE}/auth/register`, userData);
+      const response = await axios.post(`${API_BASE}/api/auth/register`, userData);
 
       const { access_token, user: newUser } = response.data;
       
@@ -90,6 +90,30 @@ export const AuthProvider = ({ children }) => {
       return {
         success: false,
         error: error.response?.data?.detail || 'Registration failed'
+      };
+    }
+  };
+
+  const socialLogin = async (provider, credentials) => {
+    try {
+      const response = await axios.post(`${API_BASE}/api/auth/social-login`, {
+        provider,
+        credentials
+      });
+
+      const { access_token, user: userData } = response.data;
+      
+      // Store token and set user
+      localStorage.setItem('greasemonkey_token', access_token);
+      setToken(access_token);
+      setUser(userData);
+
+      return { success: true };
+    } catch (error) {
+      console.error('Social login error:', error);
+      return {
+        success: false,
+        error: error.response?.data?.detail || 'Social login failed'
       };
     }
   };
@@ -111,6 +135,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     register,
+    socialLogin,
     logout,
     updateUser,
     isAuthenticated: !!user,

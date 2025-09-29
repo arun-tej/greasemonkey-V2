@@ -1,0 +1,50 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="55" fill="#FF6B35" stroke="#fff" stroke-width="3"/>
+  
+  <!-- Wrench Icon -->
+  <g transform="translate(30, 25)">
+    <!-- Main wrench body -->
+    <rect x="35" y="15" width="8" height="50" rx="4" fill="#fff"/>
+    
+    <!-- Wrench head -->
+    <rect x="30" y="8" width="18" height="20" rx="3" fill="#fff"/>
+    
+    <!-- Wrench opening -->
+    <rect x="33" y="11" width="12" height="8" rx="2" fill="#FF6B35"/>
+    
+    <!-- Adjustment lines -->
+    <line x1="32" y1="18" x2="46" y2="18" stroke="#FF6B35" stroke-width="1"/>
+    <line x1="32" y1="21" x2="46" y2="21" stroke="#FF6B35" stroke-width="1"/>
+  </g>
+  
+  <!-- Gear Icon -->
+  <g transform="translate(55, 50)">
+    <!-- Main gear circle -->
+    <circle cx="15" cy="15" r="12" fill="#fff"/>
+    <circle cx="15" cy="15" r="8" fill="#FF6B35"/>
+    
+    <!-- Gear teeth -->
+    <rect x="13" y="0" width="4" height="6" fill="#fff"/>
+    <rect x="13" y="24" width="4" height="6" fill="#fff"/>
+    <rect x="0" y="13" width="6" height="4" fill="#fff"/>
+    <rect x="24" y="13" width="6" height="4" fill="#fff"/>
+    
+    <!-- Diagonal teeth -->
+    <rect x="21" y="4" width="4" height="4" fill="#fff" transform="rotate(45 23 6)"/>
+    <rect x="21" y="22" width="4" height="4" fill="#fff" transform="rotate(45 23 24)"/>
+    <rect x="5" y="4" width="4" height="4" fill="#fff" transform="rotate(-45 7 6)"/>
+    <rect x="5" y="22" width="4" height="4" fill="#fff" transform="rotate(-45 7 24)"/>
+    
+    <!-- Center hole -->
+    <circle cx="15" cy="15" r="3" fill="#fff"/>
+  </g>
+  
+  <!-- Brand text curve -->
+  <path id="circle-text" d="M 20 60 A 40 40 0 0 1 100 60" fill="none"/>
+  <text font-family="Arial Black, sans-serif" font-size="8" font-weight="bold" fill="#fff">
+    <textPath href="#circle-text" startOffset="10%">
+      GREASE MONKEY
+    </textPath>
+  </text>
+</svg>

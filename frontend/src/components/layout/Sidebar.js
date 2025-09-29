@@ -22,6 +22,7 @@ const Sidebar = () => {
   const { user, API_BASE } = useAuth();
   const [garages, setGarages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadUserGarages();
@@ -29,10 +30,15 @@ const Sidebar = () => {
 
   const loadUserGarages = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/garages/`);
-      setGarages(response.data);
+      setError(null);
+      const response = await axios.get(`${API_BASE}/garages`);
+      // Handle both possible response formats
+      const garagesData = response.data.garages || response.data || [];
+      setGarages(Array.isArray(garagesData) ? garagesData : []);
     } catch (error) {
       console.error('Failed to load garages:', error);
+      setError(error.message);
+      setGarages([]); // Ensure garages is always an array
     } finally {
       setLoading(false);
     }
@@ -92,10 +98,23 @@ const Sidebar = () => {
               <div key={i} className="h-10 bg-gray-200 rounded animate-pulse" />
             ))}
           </div>
+        ) : error ? (
+          <div className="text-center py-8">
+            <p className="text-sm text-red-500 mb-3">
+              Failed to load garages
+            </p>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={loadUserGarages}
+            >
+              Retry
+            </Button>
+          </div>
         ) : (
           <ScrollArea className="flex-1">
             <div className="space-y-1">
-              {garages.length === 0 ? (
+              {!Array.isArray(garages) || garages.length === 0 ? (
                 <div className="text-center py-8">
                   <Bike className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                   <p className="text-sm text-gray-500 mb-3">

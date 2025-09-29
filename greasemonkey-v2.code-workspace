@@ -1,0 +1,47 @@
+{
+  "folders": [
+    {
+      "name": "GreaseMonkey V2 - Backend",
+      "path": "./backend"
+    },
+    {
+      "name": "GreaseMonkey V2 - Frontend", 
+      "path": "./frontend"
+    },
+    {
+      "name": "GreaseMonkey V2 - Mobile",
+      "path": "./GreaseMonkeyMobile"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "./backend/venv/bin/python",
+    "python.analysis.extraPaths": [
+      "./backend/venv/lib/python3.13/site-packages",
+      "./backend"
+    ],
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "python.analysis.typeCheckingMode": "off",
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+      }
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.black-formatter",
+      "ms-python.isort",
+      "ms-python.flake8",
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode"
+    ]
+  }
+}

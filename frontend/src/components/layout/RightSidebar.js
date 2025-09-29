@@ -32,9 +32,12 @@ const RightSidebar = () => {
   const loadTrendingGarages = async () => {
     try {
       const response = await axios.get(`${API_BASE}/garages/discover`);
-      setTrendingGarages(response.data.slice(0, 5));
+      // Handle both possible response formats
+      const garagesData = response.data.garages || response.data || [];
+      setTrendingGarages(Array.isArray(garagesData) ? garagesData.slice(0, 5) : []);
     } catch (error) {
       console.error('Failed to load trending garages:', error);
+      setTrendingGarages([]);
     }
   };
 
@@ -240,18 +243,18 @@ const RightSidebar = () => {
       {/* GreaseMonkey Info */}
       <Card className="border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50">
         <CardContent className="p-4 text-center">
-          <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-white rounded-xl shadow-lg border-2 border-blue-100">
+          <div className="mx-auto mb-4 flex items-center justify-center">
             <img 
               src="https://customer-assets.emergentagent.com/job_codeflow-9/artifacts/ly6ycfum_Gemini_Generated_Image_ni2zlyni2zlyni2z.svg" 
               alt="GreaseMonkey Logo" 
-              className="w-12 h-12 object-contain"
+              className="w-20 h-20 object-contain object-center"
             />
           </div>
           <h4 className="text-sm font-semibold text-gray-900 mb-2">
             Welcome to GreaseMonkey
           </h4>
           <p className="text-xs text-gray-600 mb-3">
-            Connect, ride, and share with the gearhead community worldwide.
+            Connect, ride, and share with the World of Motor Heads worldwide.
           </p>
           <Button size="sm" variant="outline" className="w-full">
             Learn More

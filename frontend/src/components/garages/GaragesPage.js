@@ -39,16 +39,24 @@ const GaragesPage = () => {
   const loadGarages = async () => {
     try {
       const [userResponse, popularResponse] = await Promise.all([
-        axios.get(`${API_BASE}/garages/`),
+        axios.get(`${API_BASE}/garages`),
         axios.get(`${API_BASE}/garages/discover`)
       ]);
 
-      setUserGarages(userResponse.data);
-      setPopularGarages(popularResponse.data.slice(0, 10));
-      setNewGarages(popularResponse.data.slice().reverse().slice(0, 8));
+      // Handle both possible response formats and ensure arrays
+      const userGaragesData = userResponse.data.garages || userResponse.data || [];
+      const popularGaragesData = popularResponse.data.garages || popularResponse.data || [];
+      
+      setUserGarages(Array.isArray(userGaragesData) ? userGaragesData : []);
+      setPopularGarages(Array.isArray(popularGaragesData) ? popularGaragesData.slice(0, 10) : []);
+      setNewGarages(Array.isArray(popularGaragesData) ? popularGaragesData.slice().reverse().slice(0, 8) : []);
     } catch (error) {
       console.error('Failed to load garages:', error);
       toast.error('Failed to load garages');
+      // Ensure all states are arrays on error
+      setUserGarages([]);
+      setPopularGarages([]);
+      setNewGarages([]);
     } finally {
       setLoading(false);
     }
@@ -174,7 +182,7 @@ const GaragesPage = () => {
             <div>
               <h1 className="text-3xl font-bold mb-2">Garages</h1>
               <p className="text-orange-100">
-                Join communities of gearheads and share your passion
+                Join communities of motor heads and share your passion
               </p>
             </div>
             <Button 

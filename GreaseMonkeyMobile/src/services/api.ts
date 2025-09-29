@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Use the same backend as the web app
-const API_BASE_URL = 'https://codeflow-9.preview.emergentagent.com/api';
+// Use localhost for development - same as our backend
+const API_BASE_URL = 'http://localhost:8000/api';
 
 class ApiService {
   private async getAuthToken(): Promise<string | null> {

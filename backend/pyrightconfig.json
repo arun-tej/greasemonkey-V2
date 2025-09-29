@@ -1,0 +1,15 @@
+{
+  "include": ["*.py", "routes/*.py"],
+  "exclude": ["**/__pycache__"],
+  "venvPath": ".",
+  "venv": "venv",
+  "pythonVersion": "3.13",
+  "pythonPlatform": "Darwin",
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": true,
+  "autoSearchPaths": true,
+  "extraPaths": [
+    "./venv/lib/python3.13/site-packages",
+    "."
+  ]
+}
